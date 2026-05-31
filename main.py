@@ -12,7 +12,7 @@ from notifiers.telegram_notifier import TelegramNotifier
 
 games = [EuroMillions(), Lotto()]
 notifiers = SimpleNamespace(
-    test=[ConsoleNotifier(), TelegramNotifier()],
+    test=[ConsoleNotifier()],
     live=[TelegramNotifier()],
 )
 

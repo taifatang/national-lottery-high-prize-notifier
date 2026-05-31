@@ -4,7 +4,7 @@ import requests
 from notifiers.base import BaseNotifier
 
 # Output format:
-# [Tomorrow] 🎰 Big Jackpot Alert!
+# 🎰 [Tomorrow] Big Jackpot Alert!
 # 🌟 EuroMillions: £122M
 # 🎱 Lotto: £20M (Must-be-won draw)
 
