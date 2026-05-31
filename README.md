@@ -19,12 +19,6 @@ Install dependencies:
 pip install -e .
 ```
 
-Run normally — only notifies on the day before a draw if the jackpot exceeds the threshold:
-
-```bash
-python main.py
-```
-
 Run in test mode — skips the day check and prints results to the console regardless of draw schedule:
 
 ```bash
