@@ -5,8 +5,8 @@ from notifiers.base import BaseNotifier
 
 # Output format:
 # 🎰 High Prize Alert!
-# • EuroMillions: £122,000,000.00
-# • Lotto: £5,013,960.00 (Must-be-won draw)
+# 🌟 EuroMillions: £122,000,000.00
+# 🎱 Lotto: £5,013,960.00 (Must-be-won draw)
 
 
 class TelegramNotifier(BaseNotifier):
@@ -20,7 +20,7 @@ class TelegramNotifier(BaseNotifier):
         for game_name, jackpot, prize_threshold, draw_days, is_roll_down in results:
             jackpot_str = f"£{jackpot:,.2f}" if jackpot is not None else "N/A"
             suffix = " (Must-be-won draw)" if is_roll_down else ""
-            lines.append(f"• {game_name}: {jackpot_str}{suffix}")
+            lines.append(f"{game_name}: {jackpot_str}{suffix}")
 
         try:
             response = requests.post(
