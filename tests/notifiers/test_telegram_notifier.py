@@ -23,7 +23,7 @@ def test_sends_message_with_must_be_won_flag(notifier, requests_mock):
     text = requests_mock.last_request.json()["text"]
     assert "EuroMillions" in text
     assert "Lotto" in text
-    assert "Must-be-won" in text
+    assert "(Must-be-won draw)" in text
 
 
 def test_send_does_not_raise_on_http_error(notifier, requests_mock):
