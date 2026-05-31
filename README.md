@@ -10,6 +10,7 @@ The notifier runs automatically every day at midnight UTC via GitHub Actions. It
 | Game | Draw Days | Prize Threshold |
 |------|-----------|-----------------|
 | EuroMillions | Tuesday, Friday | £75,000,000 |
+| Lotto | Wednesday, Saturday | £5,000,000 |
 
 ## How to Run Locally
 

@@ -3,6 +3,7 @@ from types import SimpleNamespace
 
 from games.base import Weekday
 from games.euromillions import EuroMillions
+from games.lotto import Lotto
 from notifiers.console_notifier import ConsoleNotifier
 
 
@@ -15,7 +16,7 @@ def should_notify_today(game, today: date | None = None) -> bool:
     return False
 
 
-games = [EuroMillions()]
+games = [EuroMillions(), Lotto()]
 notifiers = SimpleNamespace(
     test=[ConsoleNotifier()],
     live=[],
