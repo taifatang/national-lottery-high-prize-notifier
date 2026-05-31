@@ -1,3 +1,4 @@
+import time
 from datetime import date
 from types import SimpleNamespace
 
@@ -35,6 +36,7 @@ def main(test=False):
         if not test and not should_notify_today(game):
             continue
         data = game.fetch_draw_data()
+        time.sleep(1)
         jackpot_qualifies = data.jackpot is not None and data.jackpot >= game.prize_threshold
         if jackpot_qualifies or data.is_must_be_won:
             high_prized_games.append((
