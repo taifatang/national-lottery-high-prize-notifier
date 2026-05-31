@@ -1,9 +1,12 @@
 # LottoWatch
-Notifies you when UK National Lottery jackpots are worth playing for.
+
+A simple repository for those of us wishing to win a life changing sum. Since lotto doesn't support playing only when the prizes are high, this will help remind you. A Telegram channel has been made available at https://t.me/lottowatch
+
+<!-- Screenshot -->
 
 ## Schedule
 
-The notifier runs automatically every day at midnight UTC via GitHub Actions. It can also be triggered manually from the Actions tab at any time.
+Runs automatically Monday to Thursday at 6pm BST (5pm UTC) via GitHub Actions. Can also be triggered manually from the Actions tab at any time.
 
 ## Games
 
