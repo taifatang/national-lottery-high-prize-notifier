@@ -13,4 +13,4 @@ class EuroMillions(BaseGame):
         root = ET.fromstring(xml_text)
         el = root.find(".//next-estimated-jackpot")
         jackpot = float(el.text.replace(",", "").strip()) if el is not None and el.text else None
-        return DrawData(jackpot=jackpot, rollover_count=None)
+        return DrawData(jackpot=jackpot)

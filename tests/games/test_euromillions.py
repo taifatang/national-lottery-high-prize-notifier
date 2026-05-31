@@ -10,6 +10,6 @@ SAMPLE_XML = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 </draw-results>"""
 
 
-def test_parse_returns_jackpot_with_no_rollover_count():
+def test_parse_jackpot():
     data = EuroMillions().parse(SAMPLE_XML)
-    assert data == DrawData(jackpot=122_000_000.0, rollover_count=None)
+    assert data == DrawData(jackpot=122_000_000.0, is_must_be_won=False)

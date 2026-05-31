@@ -10,10 +10,9 @@ class FakeGame:
     name = "FakeGame"
     draw_days = [2, 5]  # Wednesday=2, Saturday=5
     prize_threshold = 1_000_000.0
-    max_rollovers = None
 
     def fetch_draw_data(self):
-        return DrawData(jackpot=2_000_000.0, rollover_count=1)
+        return DrawData(jackpot=2_000_000.0, is_must_be_won=False)
 
 
 class MockNotifier:
@@ -28,7 +27,7 @@ def fake_notifiers(notifier):
     return SimpleNamespace(live=[notifier], test=[])
 
 
-EXPECTED_RESULT = ("FakeGame", 2_000_000.0, 1_000_000.0, [2, 5], 1, None)
+EXPECTED_RESULT = ("FakeGame", 2_000_000.0, 1_000_000.0, [2, 5], False)
 
 # should_notify_today — day before draw
 
@@ -72,10 +71,10 @@ def test_game_below_threshold_no_notification():
     assert notifier.calls == []
 
 
-def test_game_qualifies_via_max_rollovers():
+def test_game_qualifies_via_must_be_won():
     game = FakeGame()
     game.prize_threshold = 5_000_000.0  # jackpot won't qualify
-    game.max_rollovers = 1              # but rollover_count == 1 >= 1 will qualify
+    game.fetch_draw_data = lambda: DrawData(jackpot=2_000_000.0, is_must_be_won=True)
     notifier = MockNotifier()
     with patch("main.games", [game]), patch("main.notifiers", fake_notifiers(notifier)), \
          patch("main.should_notify_today", return_value=True):
@@ -93,7 +92,7 @@ def test_not_notification_day_skips_fetch():
 
 def test_failed_fetch_skips_game():
     game = FakeGame()
-    game.fetch_draw_data = lambda: DrawData(jackpot=None, rollover_count=None)
+    game.fetch_draw_data = lambda: DrawData(jackpot=None)
     notifier = MockNotifier()
     with patch("main.games", [game]), patch("main.notifiers", fake_notifiers(notifier)), \
          patch("main.should_notify_today", return_value=True):
@@ -113,6 +112,6 @@ def test_multiple_qualifying_games_batched():
         main()
 
     assert notifier.calls == [[
-        ("GameA", 2_000_000.0, 1_000_000.0, [2, 5], 1, None),
-        ("GameB", 2_000_000.0, 1_000_000.0, [2, 5], 1, None),
+        ("GameA", 2_000_000.0, 1_000_000.0, [2, 5], False),
+        ("GameB", 2_000_000.0, 1_000_000.0, [2, 5], False),
     ]]

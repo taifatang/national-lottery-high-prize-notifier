@@ -17,7 +17,7 @@ class Weekday(IntEnum):
 @dataclass
 class DrawData:
     jackpot: float | None
-    rollover_count: int | None
+    is_must_be_won: bool = False
 
 
 class BaseGame(ABC):
@@ -25,7 +25,6 @@ class BaseGame(ABC):
     url: str
     draw_days: list[Weekday]
     prize_threshold: float  # pounds
-    max_rollovers: int | None = None
 
     _headers: dict = {"User-Agent": "Mozilla/5.0 (compatible; NationalLotteryNotifier/1.0)"}
 
@@ -36,7 +35,7 @@ class BaseGame(ABC):
             return self.parse(response.text)
         except Exception as e:
             print(f"[{self.name}] fetch failed: {e}")
-            return DrawData(jackpot=None, rollover_count=None)
+            return DrawData(jackpot=None)
 
     @abstractmethod
     def parse(self, xml_text: str) -> DrawData: ...
