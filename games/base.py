@@ -34,30 +34,19 @@ class BaseGame(ABC):
         try:
             response = requests.get(self.url, headers=self._headers, timeout=10)
             response.raise_for_status()
-            return self._parse_draw_data(response.text)
+            return self.parse(response.text)
         except Exception as e:
             print(f"[{self.name}] fetch failed: {e}")
             return DrawData(jackpot=None, rollover_count=None)
 
-    def _parse_draw_data(self, xml_text: str) -> DrawData:
+    def parse(self, xml_text: str) -> DrawData:
         try:
             root = ET.fromstring(xml_text)
-            jackpot = self._parse_jackpot(root)
-            rollover_count = self._parse_rollover_count(root)
+            jackpot_el = root.find(".//next-estimated-jackpot")
+            rollover_el = root.find(".//rollover-count")
+            jackpot = float(jackpot_el.text.replace(",", "").strip()) if jackpot_el is not None and jackpot_el.text else None
+            rollover_count = int(rollover_el.text) if rollover_el is not None and rollover_el.text else None
             return DrawData(jackpot=jackpot, rollover_count=rollover_count)
         except Exception as e:
             print(f"[{self.name}] parse failed: {e}")
             return DrawData(jackpot=None, rollover_count=None)
-
-    def _parse_jackpot(self, root) -> float | None:
-        el = root.find(".//next-estimated-jackpot")
-        if el is None or el.text is None:
-            print(f"[{self.name}] <next-estimated-jackpot> not found")
-            return None
-        return float(el.text.replace(",", "").strip())
-
-    def _parse_rollover_count(self, root) -> int | None:
-        el = root.find(".//rollover-count")
-        if el is None or el.text is None:
-            return None
-        return int(el.text)
