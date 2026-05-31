@@ -16,7 +16,7 @@ class Weekday(IntEnum):
 
 class BaseGame(ABC):
     name: str
-    xml_url: str
+    url: str
     draw_days: list[Weekday]
     prize_threshold: float  # pounds
 
@@ -24,7 +24,7 @@ class BaseGame(ABC):
 
     def fetch_jackpot(self) -> float | None:
         try:
-            response = requests.get(self.xml_url, headers=self._headers, timeout=10)
+            response = requests.get(self.url, headers=self._headers, timeout=10)
             response.raise_for_status()
             return self._parse_xml(response.text)
         except Exception as e:
