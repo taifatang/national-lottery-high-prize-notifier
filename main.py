@@ -34,7 +34,7 @@ def main(test=False):
             data.is_roll_down = True
         if data.is_high_prized(game.prize_threshold):
             high_prized_games.append((
-                game.name,
+                f"{game.emoji} {game.name}",
                 data.jackpot,
                 game.prize_threshold,
                 game.draw_days,
