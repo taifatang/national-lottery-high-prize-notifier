@@ -32,7 +32,7 @@ class BaseGame(ABC):
     draw_days: list[Weekday]
     prize_threshold: float  # pounds
 
-    _headers: dict = {"User-Agent": "Mozilla/5.0 (compatible; NationalLotteryNotifier/1.0)"}
+    _headers: dict = {"User-Agent": "Mozilla/5.0 (compatible; LottoWatch/1.0)"}
 
     def fetch_draw_data(self) -> GameData:
         try:
