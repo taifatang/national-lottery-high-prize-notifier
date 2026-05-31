@@ -1,6 +1,7 @@
 from datetime import date
 
 from games.base import Weekday
+from notifiers.github_console_notifier import GithubConsoleNotifier
 
 
 def should_notify_today(game, today: date | None = None) -> bool:
@@ -13,10 +14,14 @@ def should_notify_today(game, today: date | None = None) -> bool:
 
 
 games = []
-notifiers = []
+notifiers = [GithubConsoleNotifier()]
 
 
 def main():
+    if not notifiers:
+        print("No notifiers installed.")
+        return
+
     high_prized_games = []
     for game in games:
         if not should_notify_today(game):
@@ -25,9 +30,7 @@ def main():
         if jackpot is not None and jackpot >= game.prize_threshold:
             high_prized_games.append((game.name, jackpot, game.prize_threshold))
 
-    if not notifiers:
-        print("No notifiers installed.")
-        return
+    
 
     if high_prized_games:
         for notifier in notifiers:
