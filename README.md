@@ -12,10 +12,10 @@ Runs Monday to Thursday at 5pm UTC.
 
 ## Games
 
-| Game | Draw Days | Average | Median | Historic Highest | Notifying Condition |
-|------|-----------|---------|--------|------------------|---------------------|
-| EuroMillions | Tuesday, Friday | £69M | £62M | £195M | <ul><li>Jackpot ≥ £75,000,000</li></ul> |
-| Lotto | Wednesday, Saturday | £5M | £5M | £66M | <ul><li>Jackpot ≥ £5,500,000</li><li>Must-be-won draw</li></ul> |
+| Game | Draw Days | Average | Median | Max (180d) | Historic Highest | Notifying Condition |
+|------|-----------|---------|--------|------------|------------------|---------------------|
+| EuroMillions | Tuesday, Friday | £69M | £62M | £181M | £195M | <ul><li>Jackpot ≥ £75,000,000</li></ul> |
+| Lotto | Wednesday, Saturday | £5M | £5M | £9M | £66M | <ul><li>Jackpot ≥ £5,500,000</li><li>Must-be-won draw</li></ul> |
 
 *Average and median based on last 52 draws (180 days) as of 31 May 2026.*
 
