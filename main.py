@@ -1,3 +1,4 @@
+import argparse
 import time
 from datetime import date
 from types import SimpleNamespace
@@ -54,8 +55,6 @@ def main(test=False):
 
 
 if __name__ == "__main__":
-    import argparse
-
     parser = argparse.ArgumentParser()
     parser.add_argument("--test", action="store_true")
     args = parser.parse_args()
