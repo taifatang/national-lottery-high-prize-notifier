@@ -1,8 +1,8 @@
-# LottoWatch
+# LottoWatch - National Lottery High Prizes Notifier
 
-Only worth playing the lottery when the jackpot is massive. LottoWatch reminds you after work when a prize is worth going for — so you don't miss out.
+LottoWatch is a simple tool that notifies you when National Lottery prizes become above average. You’ll get reminders after work the day before a big draw, so you never miss out on a great opportunity. By focusing only on decent prizes, you will save money on playing about 40% of the time instead of every time.
 
-Join the Telegram channel: https://t.me/lottowatch
+Join the Telegram channel to receive high jackpot notifications: https://t.me/lottowatch
 
 <img src="assets/images/telegram_notifier_example.jpg" width="350" alt="LottoWatch Telegram notification example" />
 
@@ -12,10 +12,10 @@ Runs Monday to Thursday at 5pm UTC.
 
 ## Games
 
-| Game | Draw Days | Average | Median | Max (180d) | Historic Highest | Notifying Condition |
+| Game | Draw Days | Average[^stats] | Median[^stats] | Max[^stats] | Historic Highest | Notifying Condition |
 |------|-----------|---------|--------|------------|------------------|---------------------|
-| EuroMillions | Tuesday, Friday | £69M[^stats] | £62M[^stats] | £181M | £195M | <ul><li>Jackpot ≥ £75,000,000[^em]</li></ul> |
-| Lotto | Wednesday, Saturday | £7M[^stats] | £7M[^stats] | £15M | £66M | <ul><li>Jackpot ≥ £7,500,000[^lotto]</li><li>Must-be-won draw</li></ul> |
+| EuroMillions | Tuesday, Friday | £69M | £62M | £181M | £195M | <ul><li>Jackpot ≥ £75,000,000[^em]</li></ul> |
+| Lotto | Wednesday, Saturday | £7M | £7M | £15M | £66M | <ul><li>Jackpot ≥ £7,500,000[^lotto]</li><li>Must-be-won draw</li></ul> |
 
 [^stats]: Based on last 52 draws (180 days) as of 31 May 2026.
 [^em]: Threshold calibrated to ~40% of draws — 21 of 52.
