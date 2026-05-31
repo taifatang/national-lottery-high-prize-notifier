@@ -1,5 +1,5 @@
-# national-lottery-high-prize-notifier
-Notifying users when The National Lottery games reach a decent prize
+# LottoWatch
+Notifies you when UK National Lottery jackpots are worth playing for.
 
 ## Schedule
 
