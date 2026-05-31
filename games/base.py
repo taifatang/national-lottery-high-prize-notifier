@@ -1,6 +1,6 @@
-from abc import ABC
+from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from enum import IntEnum
-import xml.etree.ElementTree as ET
 import requests
 
 
@@ -14,6 +14,17 @@ class Weekday(IntEnum):
     SUNDAY = 6
 
 
+@dataclass
+class GameData:
+    jackpot: float | None
+    is_roll_down: bool | None = None
+
+    def is_high_prized(self, prize_threshold: float) -> bool:
+        if self.is_roll_down:
+            return True
+        return self.jackpot is not None and self.jackpot >= prize_threshold
+
+
 class BaseGame(ABC):
     name: str
     url: str
@@ -22,24 +33,14 @@ class BaseGame(ABC):
 
     _headers: dict = {"User-Agent": "Mozilla/5.0 (compatible; NationalLotteryNotifier/1.0)"}
 
-    def fetch_jackpot(self) -> float | None:
+    def fetch_draw_data(self) -> GameData:
         try:
             response = requests.get(self.url, headers=self._headers, timeout=10)
             response.raise_for_status()
-            return self._parse_xml(response.text)
+            return self.parse(response.text)
         except Exception as e:
             print(f"[{self.name}] fetch failed: {e}")
-            return None
+            return GameData(jackpot=None)
 
-    def _parse_xml(self, xml_text: str) -> float | None:
-        try:
-            root = ET.fromstring(xml_text)
-            el = root.find(".//next-estimated-jackpot")
-            if el is None or el.text is None:
-                print(f"[{self.name}] <next-estimated-jackpot> not found")
-                return None
-            cleaned = el.text.replace(",", "").strip()
-            return float(cleaned)
-        except Exception as e:
-            print(f"[{self.name}] parse failed: {e}")
-            return None
+    @abstractmethod
+    def parse(self, xml_text: str) -> GameData: ...
