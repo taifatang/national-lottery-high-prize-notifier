@@ -1,7 +1,7 @@
 from notifiers.base import BaseNotifier
 
 
-class GithubConsoleNotifier(BaseNotifier):
+class ConsoleNotifier(BaseNotifier):
     def send(self, results):
         col_widths = (
             max(len("Game"), max(len(g) for g, _, _ in results)),

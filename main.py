@@ -1,7 +1,7 @@
 from datetime import date
 
 from games.base import Weekday
-from notifiers.github_console_notifier import GithubConsoleNotifier
+from notifiers.console_notifier import ConsoleNotifier
 
 
 def should_notify_today(game, today: date | None = None) -> bool:
@@ -15,7 +15,9 @@ def should_notify_today(game, today: date | None = None) -> bool:
 
 games = []
 notifiers = {
-    True: [GithubConsoleNotifier()],
+    # dry run
+    True: [ConsoleNotifier()],
+    # live
     False: [],
 }
 
