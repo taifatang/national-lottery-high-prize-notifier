@@ -12,7 +12,7 @@ Notifying users when The National Lottery games reach a decent prize
 Install dependencies:
 
 ```bash
-pip install requests
+pip install -e .
 ```
 
 Run normally — only notifies on the day before a draw if the jackpot exceeds the threshold:

@@ -21,7 +21,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests
+        run: pip install -e .
 
       - name: Run notifier
         run: python main.py ${{ github.event.inputs.test == 'true' && '--test' || '' }}
