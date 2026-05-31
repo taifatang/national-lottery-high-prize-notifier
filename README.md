@@ -2,7 +2,7 @@
 
 A simple repository for those of us wishing to win a life changing sum. Since lotto doesn't support playing only when the prizes are high, this will help remind you. A Telegram channel has been made available at https://t.me/lottowatch
 
-![LottoWatch Telegram notification example](assets/images/telegram_notifier_example.jpg)
+<img src="assets/images/telegram_notifier_example.jpg" width="350" alt="LottoWatch Telegram notification example" />
 
 ## Schedule
 
