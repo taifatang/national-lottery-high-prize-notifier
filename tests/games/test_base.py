@@ -1,12 +1,12 @@
 import pytest
-from games.base import BaseGame
+from games.base import BaseGame, Weekday
 
 
 class ConcreteGame(BaseGame):
     name = "TestGame"
     xml_url = "https://example.com/xml"
-    draw_days = [2, 5]  # Wednesday=2, Saturday=5
-    threshold = 10_000_000.0
+    draw_days = [Weekday.WEDNESDAY, Weekday.SATURDAY]
+    prize_threshold = 10_000_000.0
 
 
 @pytest.fixture

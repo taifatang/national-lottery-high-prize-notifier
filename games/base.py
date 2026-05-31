@@ -1,13 +1,24 @@
 from abc import ABC
+from enum import IntEnum
 import xml.etree.ElementTree as ET
 import requests
+
+
+class Weekday(IntEnum):
+    MONDAY = 0
+    TUESDAY = 1
+    WEDNESDAY = 2
+    THURSDAY = 3
+    FRIDAY = 4
+    SATURDAY = 5
+    SUNDAY = 6
 
 
 class BaseGame(ABC):
     name: str
     xml_url: str
-    draw_days: list[int]  # Mon=0 ... Sun=6
-    threshold: float      # pounds
+    draw_days: list[Weekday]
+    prize_threshold: float  # pounds
 
     _headers: dict = {"User-Agent": "Mozilla/5.0 (compatible; NationalLotteryNotifier/1.0)"}
 
