@@ -37,7 +37,7 @@ def main(test=False):
         if not test and not should_notify_today(game):
             continue
         data = game.fetch_draw_data()
-        if data.qualifies(game.prize_threshold):
+        if data.is_high_prized(game.prize_threshold):
             high_prized_games.append((
                 game.name,
                 data.jackpot,

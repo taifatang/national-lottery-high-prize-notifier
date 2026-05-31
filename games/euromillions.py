@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 
-from games.base import BaseGame, DrawData, Weekday
+from games.base import BaseGame, GameData, Weekday
 
 
 class EuroMillions(BaseGame):
@@ -9,8 +9,8 @@ class EuroMillions(BaseGame):
     draw_days = [Weekday.TUESDAY, Weekday.FRIDAY]
     prize_threshold = 75_000_000.0
 
-    def parse(self, xml_text: str) -> DrawData:
+    def parse(self, xml_text: str) -> GameData:
         root = ET.fromstring(xml_text)
         el = root.find(".//next-estimated-jackpot")
         jackpot = float(el.text.replace(",", "").strip()) if el is not None and el.text else None
-        return DrawData(jackpot=jackpot)
+        return GameData(jackpot=jackpot)

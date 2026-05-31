@@ -2,7 +2,7 @@ from datetime import date
 from types import SimpleNamespace
 from unittest.mock import patch
 
-from games.base import DrawData
+from games.base import GameData
 from main import main, should_notify_today
 
 
@@ -12,7 +12,7 @@ class FakeGame:
     prize_threshold = 1_000_000.0
 
     def fetch_draw_data(self):
-        return DrawData(jackpot=2_000_000.0, is_roll_down=None)
+        return GameData(jackpot=2_000_000.0, is_roll_down=None)
 
 
 class MockNotifier:
@@ -74,7 +74,7 @@ def test_game_below_threshold_no_notification():
 def test_game_qualifies_via_must_be_won():
     game = FakeGame()
     game.prize_threshold = 5_000_000.0  # jackpot won't qualify
-    game.fetch_draw_data = lambda: DrawData(jackpot=2_000_000.0, is_roll_down=True)
+    game.fetch_draw_data = lambda: GameData(jackpot=2_000_000.0, is_roll_down=True)
     notifier = MockNotifier()
     with patch("main.games", [game]), patch("main.notifiers", fake_notifiers(notifier)), \
          patch("main.should_notify_today", return_value=True):
@@ -92,7 +92,7 @@ def test_not_notification_day_skips_fetch():
 
 def test_failed_fetch_skips_game():
     game = FakeGame()
-    game.fetch_draw_data = lambda: DrawData(jackpot=None)
+    game.fetch_draw_data = lambda: GameData(jackpot=None)
     notifier = MockNotifier()
     with patch("main.games", [game]), patch("main.notifiers", fake_notifiers(notifier)), \
          patch("main.should_notify_today", return_value=True):

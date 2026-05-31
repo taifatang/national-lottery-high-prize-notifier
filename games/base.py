@@ -15,13 +15,14 @@ class Weekday(IntEnum):
 
 
 @dataclass
-class DrawData:
+class GameData:
     jackpot: float | None
     is_roll_down: bool | None = None
 
-    def qualifies(self, prize_threshold: float) -> bool:
-        jackpot_qualifies = self.jackpot is not None and self.jackpot >= prize_threshold
-        return jackpot_qualifies or self.is_roll_down is True
+    def is_high_prized(self, prize_threshold: float) -> bool:
+        if self.is_roll_down:
+            return True
+        return self.jackpot is not None and self.jackpot >= prize_threshold
 
 
 class BaseGame(ABC):
@@ -32,14 +33,14 @@ class BaseGame(ABC):
 
     _headers: dict = {"User-Agent": "Mozilla/5.0 (compatible; NationalLotteryNotifier/1.0)"}
 
-    def fetch_draw_data(self) -> DrawData:
+    def fetch_draw_data(self) -> GameData:
         try:
             response = requests.get(self.url, headers=self._headers, timeout=10)
             response.raise_for_status()
             return self.parse(response.text)
         except Exception as e:
             print(f"[{self.name}] fetch failed: {e}")
-            return DrawData(jackpot=None)
+            return GameData(jackpot=None)
 
     @abstractmethod
-    def parse(self, xml_text: str) -> DrawData: ...
+    def parse(self, xml_text: str) -> GameData: ...

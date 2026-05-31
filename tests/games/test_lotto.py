@@ -1,4 +1,4 @@
-from games.base import DrawData
+from games.base import GameData
 from games.lotto import Lotto
 
 SAMPLE_XML = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -21,9 +21,9 @@ MUST_BE_WON_XML = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 def test_parse_jackpot_and_rollover_count():
     data = Lotto().parse(SAMPLE_XML)
-    assert data == DrawData(jackpot=12_500_000.0, is_roll_down=False)
+    assert data == GameData(jackpot=12_500_000.0, is_roll_down=False)
 
 
 def test_parse_sets_must_be_won_when_rolldown_flag_is_y():
     data = Lotto().parse(MUST_BE_WON_XML)
-    assert data == DrawData(jackpot=20_000_000.0, is_roll_down=True)
+    assert data == GameData(jackpot=20_000_000.0, is_roll_down=True)
